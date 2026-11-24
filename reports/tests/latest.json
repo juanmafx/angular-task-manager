@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-11-24T01:31:01.239Z",
+  "node": "v24.22.0",
+  "runner": "vitest 5.1.1",
+  "success": true,
+  "totals": {
+    "suites": 16,
+    "tests": 73,
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0
+  },
+  "coveragePercent": {
+    "statements": 100,
+    "branches": 99.01,
+    "functions": 100,
+    "lines": 100
+  },
+  "files": [
+    {
+      "file": "src/app/app.spec.ts",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "file": "src/app/core/http/api-client.service.spec.ts",
+      "tests": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "file": "src/app/core/http/api-error.spec.ts",
+      "tests": 9,
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "src/app/features/products/ui/product-list/product-list.spec.ts",
+      "tests": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "src/app/features/tasks/data/task-api.service.spec.ts",
+      "tests": 9,
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "src/app/features/tasks/domain/task.model.spec.ts",
+      "tests": 20,
+      "passed": 20,
+      "failed": 0
+    },
+    {
+      "file": "src/app/features/tasks/state/task.store.spec.ts",
+      "tests": 10,
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "file": "src/app/features/tasks/ui/task-list/task-list.spec.ts",
+      "tests": 7,
+      "passed": 7,
+      "failed": 0
+    }
+  ]
+}

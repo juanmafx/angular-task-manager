@@ -1,0 +1,58 @@
+<section class="tasks" aria-labelledby="tasks-heading">
+  <h1 id="tasks-heading">Task Manager</h1>
+
+  <form class="tasks__form" [formGroup]="form" (ngSubmit)="submit()">
+    <label class="visually-hidden" for="task-title">Task title</label>
+    <input
+      id="task-title"
+      type="text"
+      placeholder="Task title"
+      autocomplete="off"
+      [attr.maxlength]="titleMaxLength"
+      formControlName="title"
+    />
+    <button type="submit" class="button button--primary" [disabled]="store.saving()">Add</button>
+  </form>
+
+  @if (store.error(); as error) {
+    <p class="tasks__error" role="alert">{{ error }}</p>
+  }
+  @if (store.loading() && store.tasks().length === 0) {
+    <p class="tasks__hint" role="status">Loading tasks...</p>
+  }
+
+  <ul class="tasks__list">
+    @for (task of store.tasks(); track task.id) {
+      <li class="task">
+        <div>
+          <strong>{{ task.title }}</strong>
+          <span class="badge" [class]="'badge--' + task.status">{{ label(task.status) }}</span>
+        </div>
+        <div class="task__actions">
+          <button
+            type="button"
+            class="button"
+            [disabled]="store.saving()"
+            [attr.aria-label]="'Advance status of ' + task.title"
+            (click)="store.advanceStatus(task)"
+          >
+            Status
+          </button>
+          <button
+            type="button"
+            class="button button--danger"
+            [disabled]="store.saving()"
+            [attr.aria-label]="'Delete ' + task.title"
+            (click)="store.remove(task.id)"
+          >
+            Delete
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+
+  @if (store.isEmpty()) {
+    <p class="tasks__hint">No tasks yet.</p>
+  }
+</section>
