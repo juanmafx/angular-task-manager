@@ -23,6 +23,7 @@ This is a self-review, not an independent penetration test.
 | Low      | Data integrity       | Task list validation ignored the type of `description`                                | Non-string descriptions are rejected                |
 | Low      | Data integrity       | The database accepted titles made only of tabs, newlines or non-breaking spaces       | Constraint rejects whitespace-only titles           |
 | Low      | CI                   | The push trigger did not cover the `dev` and `stg` branches                           | Added both branches                                 |
+| Info     | Privacy              | The removed analytics identifier remained in git history. It is not a credential.     | Resolved by the 2026-11-24 history rewrite          |
 
 ## Verified
 
@@ -39,7 +40,6 @@ This is a self-review, not an independent penetration test.
 | Info     | The client has no authentication. Any deployment depends on the API for access control.   | Enforce authentication and authorization in the API |
 | Low      | `style-src` allows `'unsafe-inline'` because Angular injects component styles at runtime. | Adopt nonce-based CSP if served dynamically         |
 | Low      | `frame-ancestors`, HSTS and related protections cannot be set from a static page.         | Set them as HTTP headers at the proxy               |
-| Info     | The removed analytics identifier remains in git history. It is not a credential.          | None required                                       |
 | Low      | GitHub private vulnerability reporting is disabled.                                       | Enable it in the repository security settings       |
 
 ## Not applicable

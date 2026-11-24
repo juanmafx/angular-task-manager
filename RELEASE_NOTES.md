@@ -1,15 +1,19 @@
-# Release Notes: 1.0.0
+# Release Notes: 1.0.1
 
-Release prepared on 2026-11-23. No tag or GitHub release has been created.
+Released on 2026-11-24.
 
-## Highlights
+This is a documentation-only patch release. It corrects the release notes and security audit so that they describe the published 1.0.0 release and the rewritten repository history accurately. There is no change in code behaviour.
 
-- Angular 22.3 on Node.js 24, with no advisories reported by `npm audit` at preparation time.
+## Highlights of the 1.x line
+
+- Angular 22.3 on Node.js 24.
 - Layered, lazy-loaded feature architecture with signal-based state.
 - Automated tests, a committed test report, and a least-privilege CI workflow.
 - Production Content Security Policy and working XSRF header delivery.
 
 ## Upgrade notes
+
+No migration is needed from 1.0.0. When upgrading from an earlier version:
 
 1. Switch to Node.js 24 with `nvm use`.
 2. Reinstall dependencies with `npm ci --ignore-scripts`.
