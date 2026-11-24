@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     status      VARCHAR(20) NOT NULL DEFAULT 'pending',
     created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
-    CONSTRAINT tasks_title_not_blank CHECK (btrim(title) <> ''),
+    CONSTRAINT tasks_title_not_blank CHECK (title ~ '[^\t\n\v\f\r \u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]'),
     CONSTRAINT tasks_status_valid CHECK (status IN ('pending', 'in_progress', 'completed'))
 );
 

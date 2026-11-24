@@ -9,7 +9,7 @@
 
 ## Reporting a vulnerability
 
-Please do not open a public issue. Use the **Report a vulnerability** option on the repository's GitHub Security tab. If that option is unavailable, contact the owner through their GitHub profile and share details only once a private channel exists.
+Please do not post vulnerability details in a public issue. Private vulnerability reporting is not currently enabled on this repository, so contact the owner through their GitHub profile and share details only once a private channel exists.
 
 This is a personal practice project, so responses are best effort.
 

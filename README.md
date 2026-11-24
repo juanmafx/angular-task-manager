@@ -1,6 +1,6 @@
 # angularInterview
 
-A compact Angular 22 task manager client, built as an interview-preparation workspace and structured the way a production feature would be: lazy-loaded feature modules, signal-based state, validated API boundaries, and a tested security baseline.
+A compact Angular 22 task manager client, built as an interview-preparation workspace. It uses lazy-loaded feature routes, signal-based state, runtime validation of task list responses, and unit and component tests.
 
 ## Purpose
 
@@ -70,7 +70,7 @@ Open `http://localhost:4200/`. Requests to `/api` are proxied to `http://127.0.0
 | PUT    | `/api/tasks/{id}` | `{ "status": TaskStatus }`                 | Any JSON          |
 | DELETE | `/api/tasks/{id}` | None                                       | Empty or any JSON |
 
-A `Task` has a positive integer `id`, a `title`, an optional `description`, and a `status`. List responses that do not match this shape are rejected by the client.
+A `Task` has a positive integer `id`, a `title`, an optional `description`, and a `status`. List responses that do not match this shape are rejected by the client. The client ignores the body of write responses, but it must be empty or valid JSON.
 
 ## Configuration
 
@@ -78,13 +78,13 @@ A `Task` has a positive integer `id`, a `title`, an optional `description`, and 
 | ---------------- | --------------------------- | ----------------------- |
 | API base URL     | `API_BASE_URL` token        | `/api`                  |
 | Dev proxy target | `proxy.conf.json`           | `http://127.0.0.1:8000` |
-| Production CSP   | `src/index.production.html` | Same-origin only        |
+| Production CSP   | `src/index.production.html` | Same-origin sources     |
 
 The client holds no secrets and needs no environment variables.
 
 ## Database
 
-`db/schema.sql` creates the `tasks` table for the API described above, with constraints that mirror the client's validation. It is idempotent and targets PostgreSQL 14 or newer. The client does not connect to a database.
+`db/schema.sql` creates the `tasks` table for the API described above, with constraints for a non-blank title of at most 200 characters and a valid status. It can be run repeatedly and targets PostgreSQL 14 or newer. The client does not connect to a database.
 
 ```bash
 psql "$DATABASE_URL" -f db/schema.sql
@@ -105,8 +105,8 @@ The latest committed run is in [reports/tests/latest.md](reports/tests/latest.md
 ## Security
 
 - Angular template escaping, with no `innerHTML` or dynamic code execution.
-- Same-origin API calls, so Angular's XSRF protection applies to writes.
-- Strict Content Security Policy in production builds.
+- Same-origin API calls, so Angular sends the XSRF header on writes when the API issues an `XSRF-TOKEN` cookie. The API must verify that header.
+- Content Security Policy in production builds. `style-src` still allows `'unsafe-inline'` because Angular injects component styles at runtime.
 - Endpoint and id validation before a request is sent.
 - User-facing errors never echo server content.
 

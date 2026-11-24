@@ -3,7 +3,7 @@
 - **Date:** 2026-11-23
 - **Version reviewed:** 1.0.0
 - **Scope:** client source, build and editor configuration, dependencies, and git history
-- **Method:** manual code review, `npm audit`, pattern-based history scan, and a production build exercised in headless Chrome against a local stub API
+- **Method:** manual code review, `npm audit`, `gitleaks` in redacted mode, pattern-based history scan, and a production build exercised in headless Chrome against a local stub API
 
 This is a self-review, not an independent penetration test.
 
@@ -15,11 +15,14 @@ This is a self-review, not an independent penetration test.
 | High     | Runtime              | Node.js 20 is end of life                                                             | Moved to Node.js 24                                 |
 | Medium   | CSRF                 | The absolute API URL prevented Angular from sending the XSRF header                   | Same-origin `/api` with explicit XSRF configuration |
 | Medium   | Supply chain         | Editor tool configuration ran an unpinned package with `npx -y`                       | Uses the locally installed, lockfile-pinned CLI     |
-| Medium   | XSS hardening        | No Content Security Policy                                                            | Strict CSP in production builds                     |
+| Medium   | XSS hardening        | No Content Security Policy                                                            | CSP in production builds                            |
 | Low      | Input handling       | Endpoints and ids were interpolated into URLs unchecked                               | Validated before a request is sent                  |
 | Low      | Data integrity       | API responses were trusted at runtime                                                 | Task list responses are validated                   |
 | Low      | Information exposure | No controlled error handling                                                          | Fixed user messages that never echo server content  |
 | Low      | Privacy              | Angular CLI analytics identifier was committed                                        | Removed from the tree and analytics disabled        |
+| Low      | Data integrity       | Task list validation ignored the type of `description`                                | Non-string descriptions are rejected                |
+| Low      | Data integrity       | The database accepted titles made only of tabs, newlines or non-breaking spaces       | Constraint rejects whitespace-only titles           |
+| Low      | CI                   | The push trigger did not cover the `dev` and `stg` branches                           | Added both branches                                 |
 
 ## Verified
 
@@ -27,6 +30,7 @@ This is a self-review, not an independent penetration test.
 - The production page ran under its CSP with no console errors or violations.
 - Create, update and delete requests carried a valid XSRF header against a stub API that enforces it.
 - The history scan found no private keys, environment files, or credential assignments. A pattern scan cannot prove that no secret ever existed.
+- `gitleaks` in redacted mode reported no leaks across all commits.
 
 ## Open
 
@@ -36,6 +40,7 @@ This is a self-review, not an independent penetration test.
 | Low      | `style-src` allows `'unsafe-inline'` because Angular injects component styles at runtime. | Adopt nonce-based CSP if served dynamically         |
 | Low      | `frame-ancestors`, HSTS and related protections cannot be set from a static page.         | Set them as HTTP headers at the proxy               |
 | Info     | The removed analytics identifier remains in git history. It is not a credential.          | None required                                       |
+| Low      | GitHub private vulnerability reporting is disabled.                                       | Enable it in the repository security settings       |
 
 ## Not applicable
 

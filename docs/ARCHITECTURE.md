@@ -71,4 +71,4 @@ src/app/
 
 ## Data model
 
-`db/schema.sql` defines one table, `tasks`. Its check constraints mirror the domain rules: a non-blank title of at most 200 characters and one of three statuses. A trigger maintains `updated_at`.
+`db/schema.sql` defines one table, `tasks`. Its constraints enforce a non-blank title of at most 200 characters and one of three statuses. A trigger maintains `updated_at`.

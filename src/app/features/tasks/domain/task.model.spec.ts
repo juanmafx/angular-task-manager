@@ -45,12 +45,18 @@ describe('task model', () => {
     expect(isTask({ id: 1, title: 'A', status: 'pending' })).toBe(true);
   });
 
+  it.each(['Details', '', null])('accepts description %j', (description) => {
+    expect(isTask({ id: 1, title: 'A', status: 'pending', description })).toBe(true);
+  });
+
   it.each([
     null,
     'task',
     { id: '1', title: 'A', status: 'pending' },
     { id: 1, title: 2, status: 'pending' },
     { id: 1, title: 'A', status: 'archived' },
+    { id: 1, title: 'A', status: 'pending', description: 5 },
+    { id: 1, title: 'A', status: 'pending', description: {} },
   ])('rejects malformed task %#', (value) => {
     expect(isTask(value)).toBe(false);
   });

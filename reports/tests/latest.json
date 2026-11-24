@@ -1,19 +1,19 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-11-24T01:31:01.239Z",
+  "generatedAt": "2026-11-24T02:27:59.644Z",
   "node": "v24.22.0",
   "runner": "vitest 5.1.1",
   "success": true,
   "totals": {
     "suites": 16,
-    "tests": 73,
-    "passed": 73,
+    "tests": 81,
+    "passed": 81,
     "failed": 0,
     "skipped": 0
   },
   "coveragePercent": {
     "statements": 100,
-    "branches": 99.01,
+    "branches": 99.04,
     "functions": 100,
     "lines": 100
   },
@@ -32,8 +32,8 @@
     },
     {
       "file": "src/app/core/http/api-error.spec.ts",
-      "tests": 9,
-      "passed": 9,
+      "tests": 12,
+      "passed": 12,
       "failed": 0
     },
     {
@@ -50,8 +50,8 @@
     },
     {
       "file": "src/app/features/tasks/domain/task.model.spec.ts",
-      "tests": 20,
-      "passed": 20,
+      "tests": 25,
+      "passed": 25,
       "failed": 0
     },
     {

@@ -7,9 +7,12 @@ describe('toUserMessage', () => {
     [400, 'rejected'],
     [401, 'not allowed'],
     [403, 'not allowed'],
-    [404, 'no longer exists'],
+    [404, 'requested item no longer exists'],
     [422, 'rejected'],
     [500, 'failed to process'],
+    [502, 'unreachable'],
+    [503, 'unreachable'],
+    [504, 'unreachable'],
   ])('maps HTTP %i to a safe message', (status, expected) => {
     expect(toUserMessage(new HttpErrorResponse({ status }))).toContain(expected);
   });

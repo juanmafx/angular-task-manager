@@ -49,9 +49,11 @@ export function isTask(value: unknown): value is Task {
     return false;
   }
   const candidate = value as Record<string, unknown>;
+  const description = candidate['description'];
   return (
     isTaskId(candidate['id']) &&
     typeof candidate['title'] === 'string' &&
-    TASK_STATUSES.includes(candidate['status'] as TaskStatus)
+    TASK_STATUSES.includes(candidate['status'] as TaskStatus) &&
+    (description === undefined || description === null || typeof description === 'string')
   );
 }

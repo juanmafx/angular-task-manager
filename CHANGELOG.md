@@ -26,6 +26,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 - Whitespace around task titles is no longer sent to the API.
 - Replaced the scaffold test that asserted a heading the application does not render.
+- Gateway errors (502, 503, 504) now report an unreachable API, which is what the dev proxy returns when no API is running.
+- Task list validation now rejects a `description` that is not a string.
+- The database title constraint now rejects titles made only of whitespace characters such as tabs and non-breaking spaces.
 
 ### Removed
 
