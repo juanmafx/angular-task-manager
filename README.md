@@ -1,4 +1,4 @@
-# angularInterview
+# angular-task-manager
 
 A compact Angular 22 task manager client, built as an interview-preparation workspace. It uses lazy-loaded feature routes, signal-based state, runtime validation of task list responses, and unit and component tests.
 
